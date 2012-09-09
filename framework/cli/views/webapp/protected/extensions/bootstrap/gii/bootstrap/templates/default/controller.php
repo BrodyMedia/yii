@@ -151,14 +151,14 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
                       {
                      ?>
 	
-                       if (!empty($model-><?php echo  $column->name; ?>)) $criteria->addCondition('<?php echo  $column->name; ?> = "'.$model-><?php echo  $column->name; ?>.'"');
+                       if (!empty($model-><?php echo  $column->name; ?>)) $criteria->addCondition("<?php echo  $column->name; ?> = '".$model-><?php echo  $column->name; ?>."'");
                      
                     <?php 
                       } 
                     ?>
 			
+                    $session['<?php echo $this->modelClass; ?>_records']=<?php echo $this->modelClass; ?>::model()->findAll($criteria); 
 		}
-                 $session['<?php echo $this->modelClass; ?>_records']=<?php echo $this->modelClass; ?>::model()->findAll($criteria); 
        
 
                 $this->render('index',array(
