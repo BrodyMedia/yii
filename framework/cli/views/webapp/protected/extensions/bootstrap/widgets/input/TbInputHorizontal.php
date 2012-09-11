@@ -7,7 +7,7 @@
  * @package bootstrap.widgets.input
  */
 
-Yii::import('bootstrap.widgets.input.BootInput');
+Yii::import('bootstrap.widgets.input.TbInput');
 
 /**
  * Bootstrap horizontal form input widget.
@@ -210,4 +210,36 @@ class TbInputHorizontal extends TbInput
 		echo $this->getError().$this->getHint();
 		echo '</div>';
 	}
+
+	/**
+	 * Renders a datepicker field.
+	 * @return string the rendered content
+	 */
+	protected function datepickerField()
+	{
+		if (isset($this->htmlOptions['options']))
+		{
+			$options = $this->htmlOptions['options'];
+			unset($this->htmlOptions['options']);
+		}
+
+		if (isset($this->htmlOptions['events']))
+		{
+			$events = $this->htmlOptions['events'];
+			unset($this->htmlOptions['events']);
+		}
+
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		$this->widget('bootstrap.widgets.TbDatepicker', array(
+			'model'=>$this->model,
+			'attribute'=>$this->attribute,
+			'options'=>isset($options) ? $options : array(),
+			'events'=>isset($events) ? $events : array(),
+			'htmlOptions'=>$this->htmlOptions,
+		));
+		echo $this->getError().$this->getHint();
+		echo '</div>';
+	}
+
 }

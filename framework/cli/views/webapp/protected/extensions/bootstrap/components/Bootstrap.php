@@ -25,6 +25,7 @@ class Bootstrap extends CApplicationComponent
     const PLUGIN_TOOLTIP = 'tooltip';
     const PLUGIN_TRANSITION = 'transition';
     const PLUGIN_TYPEAHEAD = 'typeahead';
+    const PLUGIN_DATEPICKER = 'datepicker';
     // todo: add the affix plugin in version 2.1.0
 
 	/**
@@ -101,6 +102,8 @@ class Bootstrap extends CApplicationComponent
 	public function registerCoreCss()
 	{
 		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/bootstrap.css');
+		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/datepicker.css');
+
 	}
 
 	/**
@@ -146,6 +149,12 @@ class Bootstrap extends CApplicationComponent
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery');
 		$cs->registerScriptFile($this->getAssetsUrl().'/js/bootstrap.js', $position);
+		$cs->registerScriptFile($this->getAssetsUrl().'/js/bootstrap-datepicker.js', $position);
+	}
+
+	public function registerDatepicker($selector = null, $options = array())
+	{
+		$this->registerPlugin(self::PLUGIN_DATEPICKER, $selector, $options);
 	}
 
 	/**
