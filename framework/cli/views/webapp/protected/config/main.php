@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Lixen Application',
 
 	// preloading 'log' component
 	'preload'=>array('bootstrap','log'),
@@ -19,6 +19,8 @@ return array(
     		'ext.bootstrap-theme.widgets.*',
     		'ext.bootstrap-theme.helpers.*',
     		'ext.bootstrap-theme.behaviors.*',		
+        	'application.modules.user.models.*',
+        	'application.modules.user.components.*',
 	),
 
 	'modules'=>array(
@@ -33,6 +35,38 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>false,
 		),
+            'user'=>array(
+                # encrypting method (php hash function)
+                'hash' => 'md5',
+
+                # send activation email
+                'sendActivationMail' => true,
+
+                # allow access for non-activated users
+                'loginNotActiv' => false,
+
+                # activate user on registration (only sendActivationMail = false)
+                'activeAfterRegister' => false,
+
+                # automatically login from registration
+                'autoLogin' => true,
+
+                # registration path
+                'registrationUrl' => array('/user/registration'),
+
+                # recovery password path
+                'recoveryUrl' => array('/user/recovery'),
+
+                # login form path
+                'loginUrl' => array('/user/login'),
+
+                # page after login
+                'returnUrl' => array('/user/profile'),
+
+                # page after logout
+                'returnLogoutUrl' => array('/user/login'),
+            ),
+
 	),
 
 	// application components
@@ -40,10 +74,18 @@ return array(
 		'bootstrap'=>array(
 		        'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 		    ),
-		'user'=>array(
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
-		),
+            'user'=>array(
+                // enable cookie-based authentication
+                'class' => 'WebUser',
+                'allowAutoLogin'=>true,
+                'loginUrl' => array('/user/login'),
+            ),
+
+//		'user'=>array(
+//			// enable cookie-based authentication
+//			'allowAutoLogin'=>true,
+//		),
+
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(
@@ -64,8 +106,14 @@ return array(
 			'username' => 'admin',
 			'password' => '',
 			'charset' => 'utf8',
+			'tablePrefix' => 'tbl_',
 		),
 		*/
+//		'db'=>array(
+//			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+//			'tablePrefix' => 'tbl_',
+//		),
+
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

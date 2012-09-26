@@ -144,6 +144,23 @@ class TbInputVertical extends TbInput
 		echo $this->getError().$this->getHint();
 	}
 
+	protected function timeField()
+	{
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		echo $this->getPrepend();
+		echo '<div class="widget">' . $this->widget('CMaskedTextField',
+                    array(
+                         'mask'=>'99:99',
+                         'model'=>$this->model,
+                         'attribute'=>$this->attribute
+                         )) . '</div>';
+		echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
+		echo $this->getAppend();
+		echo $this->getError() . $this->getHint();
+		echo '</div>';
+	}
+
 	/**
 	 * Renders a CAPTCHA.
 	 * @return string the rendered content
@@ -167,9 +184,11 @@ class TbInputVertical extends TbInput
 		echo CHtml::tag('span', $this->htmlOptions, $this->model->{$this->attribute});
 		echo $this->getError().$this->getHint();
 	}
+
 	/**
 	 * Renders a datepicker field.
 	 * @return string the rendered content
+	 * @author antonio ramirez <antonio@clevertech.biz>
 	 */
 	protected function datepickerField()
 	{
@@ -186,7 +205,7 @@ class TbInputVertical extends TbInput
 		}
 
 		echo $this->getLabel();
-		$this->widget('bootstrap.widgets.BootDatepicker', array(
+		$this->widget('bootstrap.widgets.TbDatePicker', array(
 			'model'=>$this->model,
 			'attribute'=>$this->attribute,
 			'options'=>isset($options) ? $options : array(),
@@ -195,5 +214,53 @@ class TbInputVertical extends TbInput
 		));
 		echo $this->getError().$this->getHint();
 	}
-	
+
+	/**
+	 * Renders a redactorJs.
+	 * @return string the rendered content
+	 */
+	protected function redactorJs()
+	{
+		echo $this->getLabel();
+		$this->widget('bootstrap.widgets.TbRedactorJs', array(
+			'model' => $this->model,
+			'attribute' => $this->attribute,
+			'editorOptions' => isset($options) ? $options : array(),
+			'width' => isset($width) ? $width : '100%',
+			'height' => isset($height) ? $height : '400px',
+			'htmlOptions' => $this->htmlOptions
+		));
+		echo $this->getError().$this->getHint();
+	}
+
+	/**
+	 * Renders a daterange field.
+	 * @return string the rendered content
+	 * @author antonio ramirez <antonio@clevertech.biz>
+	 */
+	protected function dateRangeField()
+	{
+		if (isset($this->htmlOptions['options']))
+		{
+			$options = $this->htmlOptions['options'];
+			unset($this->htmlOptions['options']);
+		}
+
+		if (isset($options['callback']))
+		{
+			$callback = $options['callback'];
+			unset($options['callback']);
+		}
+
+		echo $this->getLabel();
+		$this->widget('bootstrap.widgets.TbDateRangePicker', array(
+			'model'=>$this->model,
+			'attribute'=>$this->attribute,
+			'options'=>isset($options) ? $options : array(),
+			'callback'=>isset($callback) ? $callback : array(),
+			'htmlOptions'=>$this->htmlOptions,
+		));
+		echo $this->getError().$this->getHint();
+	}
+
 }

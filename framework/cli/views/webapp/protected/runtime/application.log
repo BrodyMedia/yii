@@ -1,0 +1,277 @@
+2012/09/26 16:17:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('site/profile')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=site/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php
+---
+2012/09/26 16:37:54 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22008]: Datetime field overflow: 7 ERROR:  date/time field value out of range: "0000-00-00 00:00:00"
+LINE 1: ...83b61e319902e7cff45c1cc6', '2012-09-26 16:37:54', '0000-00-0...
+                                                             ^. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7).
+in /var/www/clean/protected/modules/user/controllers/AdminController.php (89)
+in /var/www/clean/index.php (13)
+2012/09/26 16:37:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22008]: Datetime field overflow: 7 ERROR:  date/time field value out of range: "0000-00-00 00:00:00"
+LINE 1: ...83b61e319902e7cff45c1cc6', '2012-09-26 16:37:54', '0000-00-0...
+                                                             ^. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7)' in /var/www/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(1017): CDbCommand->execute()
+#1 /var/www/yii/framework/db/ar/CActiveRecord.php(796): CActiveRecord->insert(NULL)
+#2 /var/www/clean/protected/modules/user/controllers/AdminController.php(89): CActiveRecord->save()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionCreate()
+#4 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('create')
+#13 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/admin/crea...')
+#14 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /var/www/clean/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/clean/index.php?r=user/admin/create
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user/admin/create
+---
+2012/09/26 16:44:23 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22008]: Datetime field overflow: 7 ERROR:  date/time field value out of range: "0000-00-00 00:00:00"
+LINE 1: ...b6256e0ae55a59b98235a34a', '2012-09-26 16:44:23', '0000-00-0...
+                                                             ^. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7).
+in /var/www/clean/protected/modules/user/controllers/AdminController.php (89)
+in /var/www/clean/index.php (13)
+2012/09/26 16:44:23 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22008]: Datetime field overflow: 7 ERROR:  date/time field value out of range: "0000-00-00 00:00:00"
+LINE 1: ...b6256e0ae55a59b98235a34a', '2012-09-26 16:44:23', '0000-00-0...
+                                                             ^. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7)' in /var/www/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(1017): CDbCommand->execute()
+#1 /var/www/yii/framework/db/ar/CActiveRecord.php(796): CActiveRecord->insert(NULL)
+#2 /var/www/clean/protected/modules/user/controllers/AdminController.php(89): CActiveRecord->save()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionCreate()
+#4 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('create')
+#13 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/admin/crea...')
+#14 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /var/www/clean/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/clean/index.php?r=user/admin/create
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user/admin/create
+---
+2012/09/26 16:44:56 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbl_users_pkey"
+DETAIL:  Key (id)=(1) already exists.. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7).
+in /var/www/clean/protected/modules/user/controllers/AdminController.php (89)
+in /var/www/clean/index.php (13)
+2012/09/26 16:44:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbl_users_pkey"
+DETAIL:  Key (id)=(1) already exists.. The SQL statement executed was: INSERT INTO "tbl_users" ("username", "password", "email", "superuser", "status", "activkey", "create_at", "lastvisit_at") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7)' in /var/www/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(1017): CDbCommand->execute()
+#1 /var/www/yii/framework/db/ar/CActiveRecord.php(796): CActiveRecord->insert(NULL)
+#2 /var/www/clean/protected/modules/user/controllers/AdminController.php(89): CActiveRecord->save()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionCreate()
+#4 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('create')
+#13 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/admin/crea...')
+#14 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /var/www/clean/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/clean/index.php?r=user/admin/create
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user/admin/create
+---
+2012/09/26 16:46:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('site/profile')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=site/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php
+---
+2012/09/26 16:52:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/user/profi...')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=user/user/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user/profile
+---
+2012/09/26 16:56:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/user/profi...')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=user/user/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user
+---
+2012/09/26 16:56:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/user/profi...')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=user/user/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user
+---
+2012/09/26 21:05:04 [error] [exception.CException] exception 'CException' with message 'Alias "ext.bootstrap.widgets.BootActiveForm" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/yii/framework/YiiBase.php:318
+Stack trace:
+#0 /var/www/yii/framework/web/CWidgetFactory.php(147): YiiBase::import('ext.bootstrap.w...', true)
+#1 /var/www/yii/framework/web/CBaseController.php(147): CWidgetFactory->createWidget(Object(LoginController), 'ext.bootstrap.w...', Array)
+#2 /var/www/yii/framework/web/CBaseController.php(190): CBaseController->createWidget('ext.bootstrap.w...', Array)
+#3 /var/www/clean/protected/modules/user/views/user/login.php(14): CBaseController->beginWidget('ext.bootstrap.w...', Array)
+#4 /var/www/yii/framework/web/CBaseController.php(127): require('/var/www/clean/...')
+#5 /var/www/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/var/www/clean/...', Array, true)
+#6 /var/www/yii/framework/web/CController.php(870): CBaseController->renderFile('/var/www/clean/...', Array, true)
+#7 /var/www/yii/framework/web/CController.php(783): CController->renderPartial('/user/login', Array, true)
+#8 /var/www/clean/protected/modules/user/controllers/LoginController.php(28): CController->render('/user/login', Array)
+#9 /var/www/yii/framework/web/actions/CInlineAction.php(50): LoginController->actionLogin()
+#10 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#11 /var/www/yii/framework/web/CController.php(287): CController->runAction(Object(CInlineAction))
+#12 /var/www/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('')
+#14 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/login')
+#15 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#16 /var/www/clean/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/clean/index.php?r=user/login
+HTTP_REFERER=http://192.168.56.10/clean/index.php
+---
+2012/09/26 21:06:07 [error] [exception.CException] exception 'CException' with message 'Alias "bootstrap.widgets.BootDetailView" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/yii/framework/YiiBase.php:318
+Stack trace:
+#0 /var/www/yii/framework/web/CWidgetFactory.php(147): YiiBase::import('bootstrap.widge...', true)
+#1 /var/www/yii/framework/web/CBaseController.php(147): CWidgetFactory->createWidget(Object(ProfileController), 'bootstrap.widge...', Array)
+#2 /var/www/yii/framework/web/CBaseController.php(173): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/clean/protected/modules/user/views/profile/profile.php(45): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii/framework/web/CBaseController.php(127): require('/var/www/clean/...')
+#5 /var/www/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/var/www/clean/...', Array, true)
+#6 /var/www/yii/framework/web/CController.php(870): CBaseController->renderFile('/var/www/clean/...', Array, true)
+#7 /var/www/yii/framework/web/CController.php(783): CController->renderPartial('profile', Array, true)
+#8 /var/www/clean/protected/modules/user/controllers/ProfileController.php(22): CController->render('profile', Array)
+#9 /var/www/yii/framework/web/actions/CInlineAction.php(50): ProfileController->actionProfile()
+#10 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#11 /var/www/yii/framework/web/CController.php(287): CController->runAction(Object(CInlineAction))
+#12 /var/www/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('')
+#14 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('user/profile')
+#15 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#16 /var/www/clean/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/clean/index.php?r=user/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=user/login
+---
+2012/09/26 21:11:36 [error] [php] include(/var/www/clean/protected/extensions/bootstrap/widgets/BootActiveForm.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:397)
+Stack trace:
+#0 /var/www/clean/protected/modules/user/components/UActiveForm.php(9): spl_autoload_call()
+#1 /var/www/yii/framework/YiiBase.php(423): include()
+#2 unknown(0): autoload()
+#3 /var/www/clean/protected/modules/user/controllers/ProfileController.php(72): spl_autoload_call()
+#4 /var/www/yii/framework/web/actions/CInlineAction.php(50): ProfileController->actionChangepassword()
+#5 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams()
+#6 /var/www/yii/framework/web/CController.php(287): ProfileController->runAction()
+#7 /var/www/yii/framework/web/CController.php(266): ProfileController->runActionWithFilters()
+#8 /var/www/yii/framework/web/CWebApplication.php(283): ProfileController->run()
+#9 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#10 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /var/www/clean/index.php(13): CWebApplication->run()
+REQUEST_URI=/clean/index.php?r=user/profile/changepassword
+in /var/www/clean/protected/modules/user/components/UActiveForm.php (9)
+in /var/www/clean/protected/modules/user/controllers/ProfileController.php (72)
+in /var/www/clean/index.php (13)
+2012/09/26 21:11:38 [error] [php] include(/var/www/clean/protected/extensions/bootstrap/widgets/BootActiveForm.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:397)
+Stack trace:
+#0 /var/www/clean/protected/modules/user/components/UActiveForm.php(9): spl_autoload_call()
+#1 /var/www/yii/framework/YiiBase.php(423): include()
+#2 unknown(0): autoload()
+#3 /var/www/clean/protected/modules/user/controllers/ProfileController.php(72): spl_autoload_call()
+#4 /var/www/yii/framework/web/actions/CInlineAction.php(50): ProfileController->actionChangepassword()
+#5 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams()
+#6 /var/www/yii/framework/web/CController.php(287): ProfileController->runAction()
+#7 /var/www/yii/framework/web/CController.php(266): ProfileController->runActionWithFilters()
+#8 /var/www/yii/framework/web/CWebApplication.php(283): ProfileController->run()
+#9 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#10 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /var/www/clean/index.php(13): CWebApplication->run()
+REQUEST_URI=/clean/index.php?r=user/profile/changepassword
+in /var/www/clean/protected/modules/user/components/UActiveForm.php (9)
+in /var/www/clean/protected/modules/user/controllers/ProfileController.php (72)
+in /var/www/clean/index.php (13)
+2012/09/26 21:20:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "wifiUser".' in /var/www/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('wifiUser')
+#1 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/clean/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/clean/index.php?r=wifiUser
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=site/index
+---
+2012/09/26 21:27:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /var/www/yii/framework/web/CController.php:484
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(271): CController->missingAction('profile')
+#1 /var/www/yii/framework/web/CWebApplication.php(283): CController->run('profile')
+#2 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('site/profile')
+#3 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /var/www/clean/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/clean/index.php?r=site/profile
+HTTP_REFERER=http://192.168.56.10/clean/index.php?r=wifiUser/index
+---
+2012/09/26 21:31:56 [error] [php] include(/var/www/clean/protected/extensions/bootstrap/widgets/BootActiveForm.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:397)
+Stack trace:
+#0 /var/www/clean/protected/modules/user/components/UActiveForm.php(9): spl_autoload_call()
+#1 /var/www/yii/framework/YiiBase.php(423): include()
+#2 /var/www/yii/framework/YiiBase.php(298): autoload()
+#3 /var/www/yii/framework/web/CWidgetFactory.php(147): import()
+#4 /var/www/yii/framework/web/CBaseController.php(147): CWidgetFactory->createWidget()
+#5 /var/www/yii/framework/web/CBaseController.php(190): RegistrationController->createWidget()
+#6 /var/www/clean/protected/modules/user/views/user/registration.php(22): RegistrationController->beginWidget()
+#7 /var/www/yii/framework/web/CBaseController.php(127): require()
+#8 /var/www/yii/framework/web/CBaseController.php(96): RegistrationController->renderInternal()
+#9 /var/www/yii/framework/web/CController.php(870): RegistrationController->renderFile()
+#10 /var/www/yii/framework/web/CController.php(783): RegistrationController->renderPartial()
+#11 /var/www/clean/protected/modules/user/controllers/RegistrationController.php(78): RegistrationController->render()
+#12 /var/www/yii/framework/web/actions/CInlineAction.php(50): RegistrationController->actionRegistration()
+#13 /var/www/yii/framework/web/CController.php(309): CInlineAction->runWithParams()
+#14 /var/www/yii/framework/web/CController.php(287): RegistrationController->runAction()
+#15 /var/www/yii/framework/web/CController.php(266): RegistrationController->runActionWithFilters()
+#16 /var/www/yii/framework/web/CWebApplication.php(283): RegistrationController->run()
+#17 /var/www/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#18 /var/www/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#19 /var/www/clean/index.php(13): CWebApplication->run()
+REQUEST_URI=/clean/index.php?r=user/registration
+in /var/www/clean/protected/modules/user/components/UActiveForm.php (9)
+in /var/www/clean/protected/modules/user/views/user/registration.php (22)
+in /var/www/clean/protected/modules/user/controllers/RegistrationController.php (78)
+2012/09/26 21:34:18 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in /var/www/clean/protected/modules/user/controllers/RegistrationController.php (31)
+in /var/www/clean/index.php (13)
+2012/09/26 21:34:19 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in /var/www/clean/protected/modules/user/controllers/RegistrationController.php (31)
+in /var/www/clean/index.php (13)
+2012/09/26 21:34:20 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in /var/www/clean/protected/modules/user/controllers/RegistrationController.php (31)
+in /var/www/clean/index.php (13)

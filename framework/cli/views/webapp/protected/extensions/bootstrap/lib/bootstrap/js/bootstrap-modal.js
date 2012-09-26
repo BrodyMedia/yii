@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-modal.js v2.1.0
+ * bootstrap-modal.js v2.0.4
  * http://twitter.github.com/bootstrap/javascript.html#modals
  * =========================================================
  * Copyright 2012 Twitter, Inc.
@@ -69,10 +69,7 @@
             that.$element[0].offsetWidth // force reflow
           }
 
-          that.$element
-            .addClass('in')
-            .attr('aria-hidden', false)
-            .focus()
+          that.$element.addClass('in')
 
           that.enforceFocus()
 
@@ -102,9 +99,7 @@
 
         $(document).off('focusin.modal')
 
-        this.$element
-          .removeClass('in')
-          .attr('aria-hidden', true)
+        this.$element.removeClass('in')
 
         $.support.transition && this.$element.hasClass('fade') ?
           this.hideWithTransition() :
@@ -123,11 +118,11 @@
     , escape: function () {
         var that = this
         if (this.isShown && this.options.keyboard) {
-          this.$element.on('keyup.dismiss.modal', function ( e ) {
+          $(document).on('keyup.dismiss.modal', function ( e ) {
             e.which == 27 && that.hide()
           })
         } else if (!this.isShown) {
-          this.$element.off('keyup.dismiss.modal')
+          $(document).off('keyup.dismiss.modal')
         }
       }
 
@@ -227,12 +222,7 @@
         , option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
       e.preventDefault()
-
-      $target
-        .modal(option)
-        .one('hide', function () {
-          $this.focus()
-        })
+      $target.modal(option)
     })
   })
 
