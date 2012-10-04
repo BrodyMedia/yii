@@ -30,7 +30,7 @@ return array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'pass',
 			'generatorPaths'=>array(
-			            'bootstrap.gii',
+			            'bootstrap.gii','ext.mpgii',
 			 ),
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>false,
@@ -107,6 +107,15 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
+		),
+		'db_345'=>array(
+			'connectionString' => 'pgsql:host=10.20.4.100;port=6432;dbname=tux_pub',
+			'emulatePrepare' => true,
+			'username' => 'admin',
+			'password' => '',
+			'charset' => 'utf8',
+			'tablePrefix' => 'tbl_',
+			'class'=>'CDbConnection',
 		),
 		*/
 //		'db'=>array(
