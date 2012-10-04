@@ -50,7 +50,7 @@
 <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
+class <?php echo $modelClass; ?> extends <?php echo " MultiActiveRecord \n"; ?>
 {
 	/**
 	 * Returns the static model of the specified AR class.
