@@ -125,7 +125,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','range','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'0000-00-00',
+					'default':'now()',
 					'range':'',
 					'widgetparams':''
 				}
@@ -353,7 +353,7 @@ class ProfileFieldController extends Controller
 									||$model->field_type=='VARCHAR'
 									||$model->field_type=='BLOB'
 									||$model->field_type=='BINARY'
-								)?" DEFAULT ''":(($model->field_type=='DATE')?" DEFAULT '0000-00-00'":" DEFAULT 0"));
+								)?" DEFAULT ''":(($model->field_type=='DATE')?" DEFAULT 'now()'":" DEFAULT 0"));
 				}
 				$model->dbConnection->createCommand($sql)->execute();
 				$model->save();
