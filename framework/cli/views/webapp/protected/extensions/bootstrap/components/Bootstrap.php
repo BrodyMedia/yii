@@ -29,6 +29,7 @@ class Bootstrap extends CApplicationComponent
 	const PLUGIN_REDACTOR = 'redactor';
 	const PLUGIN_AFFIX = 'affix';
 	const PLUGIN_DATERANGEPICKER = 'daterangepicker';
+	const PLUGIN_HTML5EDITOR = 'wysihtml5';
 
 	/**
 	 * @var boolean whether to register the Bootstrap core CSS (bootstrap.min.css).
@@ -45,6 +46,12 @@ class Bootstrap extends CApplicationComponent
 	 * @since 0.9.12
 	 */
 	public $yiiCss = true;
+
+	/**
+	 * @var boolean whether to register the JQuery-specific CSS missing from Bootstrap.
+	 */
+	public $jqueryCss = true;
+
 	/**
 	 * @var boolean whether to register jQuery and the Bootstrap JavaScript.
 	 * @since 0.9.10
@@ -92,6 +99,9 @@ class Bootstrap extends CApplicationComponent
 		if ($this->yiiCss !== false)
 			$this->registerYiiCss();
 
+		if($this->jqueryCss !== false)
+			$this->registerJQueryCss();
+
 		if ($this->enableJS !== false)
 			$this->registerCoreScripts();
 
@@ -103,7 +113,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerCoreCss()
 	{
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap.css');
+		$this->registerAssetCss('bootstrap' . (!YII_DEBUG ? '.min' : '') . '.css');
 	}
 
 	/**
@@ -115,7 +125,7 @@ class Bootstrap extends CApplicationComponent
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
-		$cs->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-responsive.css');
+		$cs->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-responsive' . (!YII_DEBUG ? '.min' : '') . '.css');
 	}
 
 	/**
@@ -124,9 +134,17 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerYiiCss()
 	{
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-yii.css');
+		$this->registerAssetCss('bootstrap-yii.css');
 	}
 
+	/**
+	 * Registers the JQuery-specific CSS missing from Bootstrap.
+	 */
+	public function registerJQueryCss()
+	{
+		Yii::app()->getClientScript()->scriptMap['jquery-ui.css'] = $this->getAssetsUrl() . '/css/jquery-ui-bootstrap.css';
+		$this->registerAssetCss('jquery-ui-bootstrap.css');
+	}
 	/**
 	 * Registers a specific css in the asset's css folder
 	 * @param string $cssFile the css file name to register
@@ -159,7 +177,7 @@ class Bootstrap extends CApplicationComponent
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery');
 		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.bootbox.min.js', $position);
-		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.js', $position);
+		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap' . (!YII_DEBUG ? '.min' : '') . '.js', $position);
 	}
 
 	/**
@@ -330,6 +348,16 @@ class Bootstrap extends CApplicationComponent
 	}
 
 	/**
+	 * Registers the Bootstrap-whysihtml5 plugin.
+	 * @param null $selector
+	 * @param $options
+	 */
+	public function registerHtml5Editor($selector = null, $options = array())
+	{
+		$this->registerPlugin(self::PLUGIN_HTML5EDITOR, $selector, $options);
+	}
+
+	/**
 	 * Registers the affix plugin
 	 * @param null $selector
 	 * @param array $options
@@ -397,7 +425,7 @@ class Bootstrap extends CApplicationComponent
 	 * Returns the URL to the published assets folder.
 	 * @return string the URL
 	 */
-	protected function getAssetsUrl()
+	public function getAssetsUrl()
 	{
 		if (isset($this->_assetsUrl))
 			return $this->_assetsUrl;

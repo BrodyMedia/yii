@@ -1,59 +1,143 @@
-<?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
-
-	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# <?php echo Yii::app()->fb->appNamespace; ?>: http://ogp.me/ns/apps/<?php echo Yii::app()->fb->appNamespace; ?>#">
+	<?php Yii::app()->controller->widget('ext.seo.widgets.SeoHead', array(
+		'defaultDescription'=>Yii::app()->params['appDescription'],
+		'httpEquivs'=>array('Content-Type'=>'text/html; charset=utf-8', 'Content-Language'=>'en-US'),
+		'title'=>array('class'=>'ext.seo.widgets.SeoTitle', 'separator'=>' :: '),
+	)); ?>
+	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico">
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl.'/css/styles.css'); ?>
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+<!-- start Mixpanel --><script type="text/javascript">(function(d,c){var a,b,g,e;a=d.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===d.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';b=d.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);c._i=[];c.init=function(a,d,f){var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";g="disable track track_links track_forms register register_once unregister identify name_tag set_config".split(" ");for(e=0;e<
+g.length;e++)(function(a){b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}})(g[e]);c._i.push([a,d,f])};window.mixpanel=c})(document,[]);
+mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-29040179-1']);
+		_gaq.push(['_trackPageview']);
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 </head>
 
-<body>
+<body id="top">
 
-<div class="container" id="page">
+<div id="fb-root"></div>
+<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : <?php echo Yii::app()->fb->appID; ?>, // App ID
+			status     : true, // check login status
+			cookie     : true, // enable cookies to allow the server to access the session
+			xfbml      : true  // parse XFBML
+		});
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
+		// Additional initialization code here
+	};
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+	// Load the SDK Asynchronously
+	(function(d){
+		var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+		js = d.createElement('script'); js.id = id; js.async = true;
+		js.src = "//connect.facebook.net/en_US/all.js";
+		d.getElementsByTagName('head')[0].appendChild(js);
+	}(document));
+</script>
+
+<?php $this->widget('bootstrap.widgets.TbNavbar',array(
+	'type'=>'inverse',
+	'brand'=>CHtml::encode(Yii::app()->name),
+	'collapse'=>true,
+	'items'=>array(
+		array(
+			'class'=>'bootstrap.widgets.TbMenu',
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				//array('label'=>'Home', 'url'=>Yii::app()->homeUrl,
+				//		'active'=>Yii::app()->controller->id === 'site' && Yii::app()->controller->action->id === 'index'),
 			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+			'htmlOptions'=>array('class'=>'pull-left'),
+		),
+		array(
+			'class'=>'bootstrap.widgets.TbMenu',
+			'items'=>array(
+			    array('label' => 'Login', 'url' => array('/user/login'), 'visible' => Yii::app()->user->isGuest),
+                            array('label' => Yii::app()->user->name, 'url' => array('/user/profile'), 'visible' => !Yii::app()->user->isGuest),
+                            array('label' => 'Logout', 'url' => array('/user/logout'), 'visible' => !Yii::app()->user->isGuest, 'htmlOptions' => array('class' => 'btn'))
+			),
+			'htmlOptions'=>array('class'=>'pull-right'),
+		),
+	),
+)); ?>
+
+<div class="container">
+
 
 	<?php echo $content; ?>
 
-	<div class="clear"></div>
+	<hr />
+<?php $this->widget('bootstrap.widgets.TbNavbar', array(
+//    'fixed'=>'top',
+    'brand'=>false,
+    'collapse'=>true,
+	'htmlOptions'=>array('class'=>'subnav'),
+    'items'=>array(
+        array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'scrollspy'=>'.navbar',
+            'items'=>array(
+                //array('label'=>'Home', 'url'=>Yii::app()->params['webroot'], 'active'=>true),
+                array('label'=>'Report 1', 'url'=>'#','visible' => !Yii::app()->user->isGuest, 'items'=>array(
+                    array('label'=>'Daily', 'url'=>Yii::app()->params['webroot'].'tvpRegDayGrp'),
+                    array('label'=>'Montly', 'url'=>Yii::app()->params['webroot'].'tvpRegMonthGrp'),
+                    array('label'=>'Annual', 'url'=>Yii::app()->params['webroot'].'tvpRegYearGrp'),
+                    '---',
+                    array('label'=>'Cdr', 'url'=>Yii::app()->params['webroot'].'cdr'),
+                    array('label'=>'Summary Cdr', 'url'=>Yii::app()->params['webroot'].'cdrDayGroup'),
+                    //array('label'=>'NAV HEADER'),
+                )),
+                array('label'=>'Report 2', 'url'=>'#','visible' => !Yii::app()->user->isGuest, 'items'=>array(
+                    array('label'=>'Daily', 'url'=>Yii::app()->params['webroot'].'tvpRegDayGrp'),
+                    array('label'=>'Montly', 'url'=>Yii::app()->params['webroot'].'tvpRegMonthGrp'),
+                    array('label'=>'Annual', 'url'=>Yii::app()->params['webroot'].'tvpRegYearGrp'),
+                    '---',
+                    array('label'=>'Cdr', 'url'=>Yii::app()->params['webroot'].'cdr'),
+                    array('label'=>'Summary Cdr', 'url'=>Yii::app()->params['webroot'].'cdrDayGroup'),
+                    //array('label'=>'NAV HEADER'),
+                )),
+	    ),
+        ),
+    ),
+)); ?>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by Lixen Co.,Ltd.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+	<footer>
 
-</div><!-- page -->
+		<p class="powered">
+			Powered by <?php echo CHtml::link('Yii PHP framework', 'http://www.yiiframework.com', array('target'=>'_blank')); ?> /
+			<?php echo CHtml::link('jQuery', 'http://www.jquery.com', array('target'=>'_blank')); ?> /
+			<?php echo CHtml::link('Yii-Bootstrap', 'http://www.yiiframework.com/extension/bootstrap', array('target'=>'_blank')); ?> /
+			<?php echo CHtml::link('Yii-LESS', 'http://www.yiiframework.com/extension/less', array('target'=>'_blank')); ?>  /
+			<?php echo CHtml::link('Yii-SEO', 'http://www.yiiframework.com/extension/seo', array('target'=>'_blank')); ?> /
+			<?php echo CHtml::link('Yii-Facebook', '#', array('rel'=>'tooltip', 'title'=>'Link available soon')); ?> /
+			<?php echo CHtml::link('Bootstrap', 'http://twitter.github.com/bootstrap', array('target'=>'_blank')); ?> /
+			<?php echo CHtml::link('LESS', 'http://www.lesscss.org', array('target'=>'_blank')); ?>
+		</p>
+
+		<p class="copy">
+			&copy; Linuxen Co.,Ltd. <?php echo date('Y'); ?>
+		</p>
+
+	</footer>
+
+</div>
+
+<?php Yii::app()->clientScript->registerScriptFile('http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f362fc83fc39768', CClientScript::POS_END); ?>
 
 </body>
 </html>

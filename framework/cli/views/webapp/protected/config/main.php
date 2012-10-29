@@ -1,105 +1,67 @@
 <?php
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+// Set the path of Bootstrap to be the root of the project.
+//Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__).'/../../../'));
 
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
-return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+$config = array(
+	'basePath'=>realpath(dirname(__FILE__).'/..'),
 	'name'=>'Lixen Application',
 
-	// preloading 'log' component
-	'preload'=>array('bootstrap','log'),
-	'theme'=>'bootstrap',
-	// autoloading model and component classes
+	'preload'=>array(
+		'bootstrap',
+		'log',
+	),
+
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-    		'ext.bootstrap-theme.widgets.*',
-    		'ext.bootstrap-theme.helpers.*',
-    		'ext.bootstrap-theme.behaviors.*',		
         	'application.modules.user.models.*',
         	'application.modules.user.components.*',
 	),
 
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'pass',
-			'generatorPaths'=>array(
-			            'bootstrap.gii','ext.mpgii',
-			 ),
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>false,
+			'generatorPaths'=>array('bootstrap.gii'),
 		),
             'user'=>array(
                 # encrypting method (php hash function)
                 'hash' => 'md5',
-
                 # send activation email
                 'sendActivationMail' => true,
-
                 # allow access for non-activated users
                 'loginNotActiv' => false,
-
                 # activate user on registration (only sendActivationMail = false)
                 'activeAfterRegister' => false,
-
                 # automatically login from registration
                 'autoLogin' => true,
-
                 # registration path
                 'registrationUrl' => array('/user/registration'),
-
                 # recovery password path
                 'recoveryUrl' => array('/user/recovery'),
-
                 # login form path
                 'loginUrl' => array('/user/login'),
-
                 # page after login
                 'returnUrl' => array('/user/profile'),
-
                 # page after logout
                 'returnLogoutUrl' => array('/user/login'),
             ),
 
 	),
 
-	// application components
 	'components'=>array(
 		'bootstrap'=>array(
-		        'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
-		    ),
-            'user'=>array(
-                // enable cookie-based authentication
-                'class' => 'WebUser',
-                'allowAutoLogin'=>true,
-                'loginUrl' => array('/user/login'),
-            ),
-
-//		'user'=>array(
-//			// enable cookie-based authentication
-//			'allowAutoLogin'=>true,
-//		),
-
-		// uncomment the following to enable URLs in path-format
-		/*
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
+			'class'=>'ext.bootstrap.components.Bootstrap',
+			'responsiveCss'=>true,
 		),
-		*/
-
-		// uncomment the following to use a MySQL database
-		/*
+        	'user'=>array(
+            	// enable cookie-based authentication
+            		'class' => 'WebUser',
+            		'allowAutoLogin'=>true,
+            		'loginUrl' => array('/user/login'),
+        	),
 		'db'=>array(
 			'connectionString' => 'pgsql:host=localhost;dbname=lixen',
 			'emulatePrepare' => true,
@@ -108,24 +70,13 @@ return array(
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
 		),
-		'db_345'=>array(
-			'connectionString' => 'pgsql:host=10.20.4.100;port=6432;dbname=tux_pub',
-			'emulatePrepare' => true,
-			'username' => 'admin',
-			'password' => '',
-			'charset' => 'utf8',
-			'tablePrefix' => 'tbl_',
-			'class'=>'CDbConnection',
-		),
-		*/
-//		'db'=>array(
-//			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-//			'tablePrefix' => 'tbl_',
-//		),
-
 		'errorHandler'=>array(
-			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
+		),
+		'fb'=>array(
+			'class'=>'ext.facebook.components.FacebookConnect',
+			'appID'=>'106265262835735',
+			'appNamespace'=>'yii-bootstrap',
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',
@@ -134,20 +85,26 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
+			),
+		),
+		'urlManager'=>array(
+			'showScriptName'=>false,
+			'urlFormat'=>'path',
+			'urlSuffix'=>'.html',
+			'rules'=>array(
+				'index'=>'site/index',
+				'setup'=>'site/setup',
 			),
 		),
 	),
 
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
+	// Application-level parameters
 	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'appTitle'=>'Yii-Bootstrap - Bringing together the Yii PHP framework and Twitter\'s Bootstrap',
+		'appDescription'=>'Yii-Bootstrap is an extension for Yii that provides a wide range of server-side widgets that allow you to easily use Bootstrap with Yii.',
 	),
 );
+
+return file_exists(dirname(__FILE__).'/local.php')
+		? CMap::mergeArray($config, require('local.php'))
+		: $config;

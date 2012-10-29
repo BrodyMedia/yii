@@ -22,10 +22,6 @@ class TbDatePicker extends CInputWidget
 	 * @var string[] the JavaScript event handlers.
 	 */
 	public $events = array();
-	/**
-	 * @var array the HTML attributes for the widget container.
-	 */
-	public $htmlOptions = array();
 
 	/**
 	 * Initializes the widget.
@@ -39,7 +35,7 @@ class TbDatePicker extends CInputWidget
 			$this->options['language'] = Yii::app()->language;
 
 		if (!isset($this->options['format']))
-			$this->options['format'] = 'yyyy-mm-dd';
+			$this->options['format'] = 'mm/dd/yyyy';
 
 		if (!isset($this->options['weekStart']))
 			$this->options['weekStart'] = 0; // Sunday

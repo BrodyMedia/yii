@@ -74,6 +74,18 @@ class TbActiveForm extends CActiveForm
 	}
 
 	/**
+	 * Renders a toggle input row.
+	 * @param CModel $model the data model
+	 * @param string $attribute the attribute
+	 * @param array $htmlOptions additional HTML attributes (options key sets the options for the toggle component)
+	 * @return string the generated row
+	 */
+	public function toggleButtonRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_TOGGLEBUTTON, $model, $attribute, null, $htmlOptions);
+	}
+
+	/**
 	 * Renders a checkbox list input row.
 	 * @param CModel $model the data model
 	 * @param string $attribute the attribute
@@ -211,6 +223,18 @@ class TbActiveForm extends CActiveForm
 	}
 
 	/**
+	 * Renders a WYSIWYG bootstrap editor
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function html5EditorRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_HTML5EDITOR, $model, $attribute, null, $htmlOptions);
+	}
+
+	/**
 	 * Renders a captcha row.
 	 * @param CModel $model the data model
 	 * @param string $attribute the attribute
@@ -250,9 +274,14 @@ class TbActiveForm extends CActiveForm
 		return $this->inputRow(TbInput::TYPE_DATEPICKER, $model, $attribute, null, $htmlOptions);
 	}
 
-	public function timeRow($model, $attribute, $htmlOptions = array())
+	public function datetimepickerRow($model, $attribute, $htmlOptions = array())
 	{
-		return $this->inputRow(TbInput::TYPE_TIME, $model, $attribute, null, $htmlOptions);
+		return $this->inputRow(TbInput::TYPE_DATETIMEPICKER, $model, $attribute, null, $htmlOptions);
+	}
+
+	public function timepickerRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_TIMEPICKER, $model, $attribute, null, $htmlOptions);
 	}
 
 	/**

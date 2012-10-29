@@ -125,7 +125,6 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','range','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'now()',
 					'range':'',
 					'widgetparams':''
 				}

@@ -98,6 +98,51 @@ class TbExtendedGridView extends TbGridView
 	public $chartOptions = array();
 
 	/**
+	 * @var bool $sortableRows. If true the rows at the table will be sortable.
+	 */
+	public $sortableRows = false;
+
+	/**
+	 * @var string a javascript function that will be invoked after a successful sorting is done.
+	 * The function signature is <code>function(id, position)</code> where 'id' refers to the ID of the model id key,
+	 * 'position' the new position in the list.
+	 */
+	public $afterSortableUpdate;
+
+	/**
+	 * @var bool whether to allow selecting of cells
+	 */
+	public $selectableCells = false;
+
+	/**
+	 * @var string the filter to use to allow selection. For example, if you set the "htmlOptions" property of a column to have a
+	 * "class" of "tobeselected", you could set this property as: "td.tobeselected" in order to allow  selection to
+	 * those columns with that class only.
+	 */
+	public $selectableCellsFilter = 'td';
+
+	/**
+	 * @var string a javascript function that will be invoked after a selection is done.
+	 * The function signature is <code>function(selected)</code> where 'selected' refers to the selected columns.
+	 */
+	public $afterSelectableCells;
+	/**
+	 * @var array the configuration options to display a TbBulkActions widget
+	 * @see TbBulkActions widget for its configuration
+	 */
+	public $bulkActions = array();
+
+	/**
+	 * @var string the aligment of the bulk actions. It can be 'left' or 'right'.
+	 */
+	public $bulkActionAlign = 'right';
+
+	/**
+	 * @var TbBulkActions component that will display the bulk actions to the grid
+	 */
+	protected $bulk;
+
+	/**
 	 * @var boolean $displayExtendedSummary a helper property that is set to true if we have to render the
 	 * extended summary
 	 */
@@ -138,6 +183,14 @@ class TbExtendedGridView extends TbGridView
 		{
 			$this->displayChart = true;
 		}
+		if ($this->bulkActions !== array() && isset($this->bulkActions['actionButtons']))
+		{
+			if(!isset($this->bulkActions['class']))
+				$this->bulkActions['class'] = 'bootstrap.widgets.TbBulkActions';
+
+			$this->bulk = Yii::createComponent($this->bulkActions, $this);
+			$this->bulk->init();
+		}
 		parent::init();
 	}
 
@@ -158,6 +211,41 @@ class TbExtendedGridView extends TbGridView
 		$this->renderChart();
 		parent::renderTableHeader();
 	}
+
+	/**
+	 * Renders the table footer.
+	 */
+	public function renderTableFooter()
+	{
+		$hasFilter = $this->filter !== null && $this->filterPosition === self::FILTER_POS_FOOTER;
+
+		$hasFooter = $this->getHasFooter();
+		if ($this->bulk !== null || $hasFilter || $hasFooter)
+		{
+			echo "<tfoot>\n";
+			if ($hasFooter)
+			{
+				echo "<tr>\n";
+				foreach ($this->columns as $column)
+					$column->renderFooterCell();
+				echo "</tr>\n";
+			}
+			if ($hasFilter)
+				$this->renderFilter();
+
+			if ($this->bulk !== null)
+				$this->renderBulkActions();
+			echo "</tfoot>\n";
+		}
+	}
+
+	public function renderBulkActions()
+	{
+		echo '<tr><td colspan="' . count($this->columns) . '">';
+		$this->bulk->renderButtons();
+		echo '</td></tr>';
+	}
+
 
 	/**
 	 * Renders chart
@@ -259,10 +347,10 @@ class TbExtendedGridView extends TbGridView
 			}
 			$jsOptions = CJSON::encode($options);
 
-			if(isset($this->chartOptions['htmlOptions']['data-config']))
+			if (isset($this->chartOptions['htmlOptions']['data-config']))
 				unset($this->chartOptions['htmlOptions']['data-config']);
 
-			echo "<div id='{$chartId}' ".CHtml::renderAttributes($this->chartOptions['htmlOptions'])." data-config='{$jsOptions}'></div>";
+			echo "<div id='{$chartId}' " . CHtml::renderAttributes($this->chartOptions['htmlOptions']) . " data-config='{$jsOptions}'></div>";
 
 			$this->componentsAfterAjaxUpdate[] = "highchart{$chartId} = new Highcharts.Chart($('#{$chartId}').data('config'));";
 		}
@@ -270,7 +358,7 @@ class TbExtendedGridView extends TbGridView
 			'class' => 'bootstrap.widgets.TbHighCharts',
 			'id' => $chartId,
 			'options' => $options,
-			'htmlOptions' =>  $this->chartOptions['htmlOptions']
+			'htmlOptions' => $this->chartOptions['htmlOptions']
 		);
 		$chart = Yii::createComponent($configChart);
 		$chart->init();
@@ -355,6 +443,48 @@ class TbExtendedGridView extends TbGridView
 			Yii::app()->bootstrap->registerAssetJs('jquery.stickytableheaders.js');
 			$fixedHeaderJs = "$('#{$this->id} table.items').stickyTableHeaders({fixedOffset:{$this->headerOffset}});";
 			$this->componentsAfterAjaxUpdate[] = $fixedHeaderJs;
+		}
+
+		if ($this->sortableRows)
+		{
+			if ($this->afterSortableUpdate !== null)
+			{
+				if (!($this->afterSortableUpdate instanceof CJavaScriptExpression) && strpos($this->afterSortableUpdate, 'js:') !== 0)
+				{
+					$afterSortableUpdate = new CJavaScriptExpression($this->afterSortableUpdate);
+				} else
+				{
+					$afterSortableUpdate = $this->afterSortableUpdate;
+				}
+			}
+
+			$this->selectableRows = 1;
+			$cs->registerCoreScript('jquery.ui');
+			Yii::app()->bootstrap->registerAssetJs('jquery.sortable.gridview.js');
+
+			$afterSortableUpdate = CJavaScript::encode($afterSortableUpdate);
+			$this->componentsReadyScripts[] = "$.fn.yiiGridView.sortable('{$this->id}', {$afterSortableUpdate});";
+			$this->componentsAfterAjaxUpdate[] = "$.fn.yiiGridView.sortable('{$this->id}', {$afterSortableUpdate});";
+		}
+
+		if($this->selectableCells)
+		{
+			if($this->afterSelectableCells !== null)
+			{
+				echo strpos($this->afterSelectableCells, 'js:');
+				if (!($this->afterSelectableCells instanceof CJavaScriptExpression) && strpos($this->afterSelectableCells, 'js:') !== 0)
+				{
+					$afterSelectableCells = new CJavaScriptExpression($this->afterSelectableCells);
+				} else
+				{
+					$afterSelectableCells = $this->afterSelectableCells;
+				}
+			}
+			$cs->registerCoreScript('jquery.ui');
+			Yii::app()->bootstrap->registerAssetJs('jquery.selectable.gridview.js');
+			$afterSelectableCells = CJavaScript::encode($afterSelectableCells);
+			$this->componentsReadyScripts[] = "$.fn.yiiGridView.selectable('{$this->id}','{$this->selectableCellsFilter}',{$afterSelectableCells});";
+			$this->componentsAfterAjaxUpdate[] = "$.fn.yiiGridView.selectable('{$this->id}','{$this->selectableCellsFilter}', {$afterSelectableCells});";
 		}
 
 		$cs->registerScript(__CLASS__ . '#' . $this->id . 'Ex', '
