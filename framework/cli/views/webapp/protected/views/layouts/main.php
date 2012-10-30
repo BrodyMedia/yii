@@ -52,37 +52,9 @@ mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
 	}(document));
 </script>
 
-<?php $this->widget('bootstrap.widgets.TbNavbar',array(
-	'type'=>'inverse',
-	'brand'=>CHtml::encode(Yii::app()->name),
-	'collapse'=>true,
-	'items'=>array(
-		array(
-			'class'=>'bootstrap.widgets.TbMenu',
-			'items'=>array(
-				//array('label'=>'Home', 'url'=>Yii::app()->homeUrl,
-				//		'active'=>Yii::app()->controller->id === 'site' && Yii::app()->controller->action->id === 'index'),
-			),
-			'htmlOptions'=>array('class'=>'pull-left'),
-		),
-		array(
-			'class'=>'bootstrap.widgets.TbMenu',
-			'items'=>array(
-			    array('label' => 'Login', 'url' => array('/user/login'), 'visible' => Yii::app()->user->isGuest),
-                            array('label' => Yii::app()->user->name, 'url' => array('/user/profile'), 'visible' => !Yii::app()->user->isGuest),
-                            array('label' => 'Logout', 'url' => array('/user/logout'), 'visible' => !Yii::app()->user->isGuest, 'htmlOptions' => array('class' => 'btn'))
-			),
-			'htmlOptions'=>array('class'=>'pull-right'),
-		),
-	),
-)); ?>
 
 <div class="container">
 
-
-	<?php echo $content; ?>
-
-	<hr />
 <?php $this->widget('bootstrap.widgets.TbNavbar', array(
 //    'fixed'=>'top',
 //    'brand'=>false,
@@ -130,6 +102,10 @@ mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
     ),
 )); ?>
 
+
+	<?php echo $content; ?>
+
+	<hr />
 	<footer>
 
 		<p class="powered">
