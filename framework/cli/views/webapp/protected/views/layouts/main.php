@@ -8,6 +8,7 @@
 	)); ?>
 	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico">
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl.'/css/styles.css'); ?>
+	<?php //Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl.'/css/doc.css'); ?>
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -84,7 +85,9 @@ mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
 	<hr />
 <?php $this->widget('bootstrap.widgets.TbNavbar', array(
 //    'fixed'=>'top',
-    'brand'=>false,
+//    'brand'=>false,
+//	'type'=>'inverse',
+	'brand'=>CHtml::encode(Yii::app()->name),
     'collapse'=>true,
 	'htmlOptions'=>array('class'=>'subnav'),
     'items'=>array(
@@ -93,8 +96,8 @@ mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
             'scrollspy'=>'.navbar',
             'items'=>array(
                 //array('label'=>'Home', 'url'=>Yii::app()->params['webroot'], 'active'=>true),
-                array('label'=>'Report 1', 'url'=>'#','visible' => !Yii::app()->user->isGuest, 'items'=>array(
-                    array('label'=>'Daily', 'url'=>Yii::app()->params['webroot'].'tvpRegDayGrp'),
+                array('label'=>'Videos', 'url'=>'#','visible' => !Yii::app()->user->isGuest, 'items'=>array(
+                    array('label'=>'Admin', 'url'=>Yii::app()->params['webroot'].'videos'),
                     array('label'=>'Montly', 'url'=>Yii::app()->params['webroot'].'tvpRegMonthGrp'),
                     array('label'=>'Annual', 'url'=>Yii::app()->params['webroot'].'tvpRegYearGrp'),
                     '---',
@@ -112,7 +115,18 @@ mixpanel.init("733930f08f73894be317b7fdbfd15229");</script><!-- end Mixpanel -->
                     //array('label'=>'NAV HEADER'),
                 )),
 	    ),
+			'htmlOptions'=>array('class'=>'pull-left'),
         ),
+		array(
+			'class'=>'bootstrap.widgets.TbMenu',
+			'items'=>array(
+			    array('label' => 'Login', 'url' => array('/user/login'), 'visible' => Yii::app()->user->isGuest),
+                            array('label' => Yii::app()->user->name, 'url' => array('/user/profile'), 'visible' => !Yii::app()->user->isGuest),
+                            array('label' => 'Logout', 'url' => array('/user/logout'), 'visible' => !Yii::app()->user->isGuest, 'htmlOptions' => array('class' => 'btn'))
+			),
+			'htmlOptions'=>array('class'=>'pull-right'),
+		),
+
     ),
 )); ?>
 

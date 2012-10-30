@@ -31,45 +31,39 @@ Yii::app()->clientScript->registerScript('siteIndex', "
 ");
 ?>
 
-	<div class="row">
-		<div class="span9">
+<div class="jumbotron masthead">
+  <div class="container">
+    <h1>Bootstrap</h1>
+    <p>Sleek, intuitive, and powerful front-end framework for faster and easier web development.</p>
+    <p><a href="assets/bootstrap.zip" class="btn btn-primary btn-large" >Download Bootstrap</a></p>
+    <ul class="masthead-links">
+      <li><a href="http://github.com/twitter/bootstrap" >GitHub project</a></li>
+      <li><a href="./extend.html" >Extend</a></li>
+      <li>Version 2.1.1</li>
+    </ul>
+  </div>
+</div>
 
-			<?php $this->beginWidget('bootstrap.widgets.TbHeroUnit', array(
-				'heading'=>'ยินดีต้อนรับ!',
-			)); ?>
-				<p>
-					Bringing together the <?php echo CHtml::link('Yii PHP framework', 'http://www.yiiframework.com'); ?> and
-					<?php echo CHtml::link('Twitter Bootstrap', 'http://twitter.github.com/bootstrap/'); ?>.
-				</p>
-				<p>
-					<?php echo CHtml::link('Yii-Bootstrap', 'http://www.yiiframework.com/extension/bootstrap/'); ?>
-					is an extension for Yii that provides a wide range of widgets that allow developers to easily use Bootstrap with Yii.
-					All widgets have been developed following Yii's conventions and work seamlessly together with Bootstrap and its jQuery plugins.
-				</p>
-			<?php $this->endWidget(); ?>
+  <div class="marketing">
 
-			<?php if (!empty($this->breadcrumbs)):?>
-				<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-					'links'=>$this->breadcrumbs,
-				)); ?>
-			<?php endif?>
+    <h1>Introducing Bootstrap.</h1>
+    <p class="marketing-byline">Need reasons to love Bootstrap? Look no further.</p>
 
-		</div>
-
-		<div class="span3">
-			<div class="donate">
-
-				<h3>Support development</h3>
-
-				<p>Would you like to say thanks for the time and effort put on this project? Consider donating.</p>
-
-				<hr />
-
-				<h3>Support development</h3>
-
-				<p>Would you like to say thanks for the time and effort put on this project? Consider donating.</p>
-
-
-			</div>
-		</div>
-	</div>
+    <div class="row-fluid">
+      <div class="span4">
+        <img src="assets/img/bs-docs-twitter-github.png">
+        <h2>By nerds, for nerds.</h2>
+        <p>Built at Twitter by <a href="http://twitter.com/mdo">@mdo</a> and <a href="http://twitter.com/fat">@fat</a>, Bootstrap utilizes <a href="http://lesscss.org">LESS CSS</a>, is compiled via <a href="http://nodejs.org">Node</a>, and is managed through <a href="http://github.com">GitHub</a> to help nerds do awesome stuff on the web.</p>
+      </div>
+      <div class="span4">
+        <img src="assets/img/bs-docs-responsive-illustrations.png">
+        <h2>Made for everyone.</h2>
+        <p>Bootstrap was made to not only look and behave great in the latest desktop browsers (as well as IE7!), but in tablet and smartphone browsers via <a href="./scaffolding.html#responsive">responsive CSS</a> as well.</p>
+      </div>
+      <div class="span4">
+        <img src="assets/img/bs-docs-bootstrap-features.png">
+        <h2>Packed with features.</h2>
+        <p>A 12-column responsive <a href="./scaffolding.html#grid">grid</a>, dozens of components, <a href="./javascript.html">javascript plugins</a>, typography, form controls, and even a <a href="./customize.html">web-based Customizer</a> to make Bootstrap your own.</p>
+      </div>
+    </div>
+</div>
